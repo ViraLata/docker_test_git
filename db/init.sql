@@ -8,12 +8,16 @@ CREATE TABLE public.star_products (
 
 INSERT INTO public.star_products
 (name_product, description, price)
-VALUES('product 1', 'test description', 10.02);
+VALUES('Hire', 'test description', 10.02);
 
 INSERT INTO public.star_products
 (name_product, description, price)
-VALUES('product 2', 'test description 2', 101.02);
+VALUES('Learn', 'test description 2', 101.02);
 
 INSERT INTO public.star_products
 (name_product, description, price)
-VALUES('product 3', 'test description 3', 3333);
+VALUES('Perform', 'test description 3', 3333);
+
+INSERT INTO public.star_products
+(name_product, description, price)
+VALUES('Insights', 'test description 3', 3333);
