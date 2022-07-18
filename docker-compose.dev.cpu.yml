@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.cpu
+    ports:
+      - "4000:4000"
+    restart: always
+    volumes:
+      - ./backend:/usr/src/app
+      # Anonymous volume:
+      - /usr/src/app/node_modules
+    env_file:
+      - ./envs/star-dev.env
+    depends_on:
+      - star_postgres   
+    networks:
+      star-ss-poc-back:
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.cpu
+    ports:
+      - "4200:4200"
+    restart: always
+    volumes:
+      - ./frontend:/usr/src/app
+      # Anonymous volume:
+      - /usr/src/app/node_modules
+    env_file:
+      - ./envs/star-dev.env
+    depends_on:
+      - star_postgres   
+    networks:
+      star-ss-poc-back:
+  
+  star_postgres:
+    build:
+      context: ./db
+      dockerfile: Dockerfile.cpu
+    ports:
+      - "5432:5432"
+    volumes:
+      - star_postgres:/var/lib/postgresql/data
+    env_file:
+      - ./envs/star-dev.env
+    networks:
+      star-ss-poc-back:
+
+  
+volumes:
+  star_postgres:
+
+networks:
+  star-ss-poc-back:
